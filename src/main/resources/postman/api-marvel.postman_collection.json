@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "f91d21f3-172d-4cac-93b9-0599a8a6e628",
+		"name": "api-marvel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4980059"
+	},
+	"item": [
+		{
+			"name": "/v1/public/characters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api-marvel}}/v1/public/characters?apikey=7nsipcdow5hg9get9rovz1lf6!",
+					"host": [
+						"{{api-marvel}}"
+					],
+					"path": [
+						"v1",
+						"public",
+						"characters"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "7nsipcdow5hg9get9rovz1lf6!"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/public/characters/{characterId}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api-marvel}}/v1/public/characters/{characterId}?apikey=1fec86b2e8744db4da3cfb57ffe07969",
+					"host": [
+						"{{api-marvel}}"
+					],
+					"path": [
+						"v1",
+						"public",
+						"characters",
+						"{characterId}"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "1fec86b2e8744db4da3cfb57ffe07969"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
