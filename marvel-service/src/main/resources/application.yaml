@@ -1,0 +1,8 @@
+logging:
+  level:
+    org.springframework.web.client.RestClient: DEBUG
+
+marvel:
+  url: https://gateway.marvel.com/v1/public
+  public-key: ${PUBLIC_KEY}
+  private-key: ${PRIVATE_KEY}

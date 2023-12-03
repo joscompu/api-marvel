@@ -1,29 +1,37 @@
 package com.openpay.marvelservice.controller;
 
-import com.openpay.marvelservice.service.api.MarvelService;
+import com.openpay.marvel.api.MarvelApi;
+import com.openpay.marvel.api.impl.ComicsFilter;
+import com.openpay.marvel.api.impl.PaginationFilter;
+import com.openpay.marvel.api.model.Character;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 //Author: Jose Calderon
 @RestController
-@RequestMapping("/marvel")
+@RequestMapping("/characters")
 public class CharacterController {
-    private final MarvelService marvelService;
+    private final MarvelApi api;
 
-    public CharacterController(@Autowired MarvelService marvelService) {
-        this.marvelService = marvelService;
+    public CharacterController(@Autowired MarvelApi api) {
+        this.api = api;
     }
 
-    @GetMapping(value = "/characters", produces = "application/json")
-    public String getCharacters() {
-        return marvelService.getCharacters();
+    @GetMapping(produces = "application/json")
+    public List<Character> getCharacters(@RequestParam(value = "limit", required = false) Integer limit,
+                                         @RequestParam(value = "offset", required = false) Integer offset,
+                                         @RequestParam(value = "comics", required = false, defaultValue = "") String comics) {
+
+        return api.getCharacters(List.of(
+                new PaginationFilter(limit, offset),
+                new ComicsFilter(Arrays.asList(comics.split(",")))));
     }
 
-    @GetMapping(value = "/characters/{characterId}", produces = "application/json")
-    public String getCharactersById(@PathVariable Long characterId) {
-        return marvelService.getCharacterId(characterId);
+    @GetMapping(value = "/{characterId}", produces = "application/json")
+    public Character getCharactersById(@PathVariable String characterId) {
+        return api.getCharacter(characterId);
     }
 }
